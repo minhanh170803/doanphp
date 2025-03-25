@@ -1,12 +1,10 @@
-<?php
+<?php 
 session_start();
-if (
-    isset($_SESSION['admin_id']) &&
-    isset($_SESSION['role'])
-) {
+if (isset($_SESSION['admin_id']) && 
+    isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Admin') {
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +20,9 @@ if (
 </head>
 
 <body>
-    <?php
-            include "inc/navbar.php";
-            ?>
+    <?php 
+        include "inc/navbar.php";
+     ?>
     <div class="container mt-5">
         <div class="container text-center">
             <div class="row row-cols-5">
@@ -32,7 +30,7 @@ if (
                     <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
                     Teachers
                 </a>
-                <a href="" class="col btn btn-dark m-2 py-3">
+                <a href="student.php" class="col btn btn-dark m-2 py-3">
                     <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
                     Students
                 </a>
@@ -82,15 +80,15 @@ if (
 </body>
 
 </html>
-<?php
+<?php 
 
-    } else {
-        header("Location: ../login.php");
-        exit;
-    }
-} else {
+  }else {
     header("Location: ../login.php");
     exit;
-}
+  } 
+}else {
+	header("Location: ../login.php");
+	exit;
+} 
 
 ?>

@@ -1,9 +1,9 @@
 <?php
-$sName = "localhost";  // Địa chỉ máy chủ MySQL
+$sName = "127.0.0.1";  // Địa chỉ máy chủ MySQL
 $uName = "root";       // Tên đăng nhập MySQL
-$pass  = "Title123";       // Mật khẩu MySQL
+$pass  = "1234";       // Mật khẩu MySQL
 $db_name = "phpdb";    // Tên cơ sở dữ liệu
-$port = "3306";        // Cổng MySQL (3307 theo yêu cầu)
+$port = "3307";        // Cổng MySQL (3307 theo yêu cầu)
 
 
 
