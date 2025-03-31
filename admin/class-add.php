@@ -4,12 +4,11 @@ if (isset($_SESSION['admin_id']) &&
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Admin') {
-
-       $grade_code = '';
-       $grade = '';
-
-       if (isset($_GET['grade_code'])) $grade_code = $_GET['grade_code'];
-       if (isset($_GET['grade'])) $grade = $_GET['grade'];
+       include '../DB_connection.php';
+       include 'data/grade.php';
+       include 'data/section.php';
+       $grades = getAllGrades($conn);
+       $sections = getAllSections($conn);
 
  ?>
 <!DOCTYPE html>
@@ -18,7 +17,7 @@ if (isset($_SESSION['admin_id']) &&
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Add Grade</title>
+    <title>Admin - Add Class</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../logo.png">
@@ -29,12 +28,18 @@ if (isset($_SESSION['admin_id']) &&
 <body>
     <?php 
         include "inc/navbar.php";
-     ?>
-    <div class="container mt-5">
-        <a href="grade.php" class="btn btn-dark">Go Back</a>
+        if ($sections == 0 || $grades == 0) { ?>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/grade-add.php">
-            <h3>Add New Grade</h3>
+    <div class="alert alert-info" role="alert">
+        First create section and class
+    </div>
+    <a href="class.php" class="btn btn-dark">Go Back</a>
+    <?php } ?>
+    <div class="container mt-5">
+        <a href="class.php" class="btn btn-dark">Go Back</a>
+
+        <form method="post" class="shadow p-3 mt-5 form-w" action="req/class-add.php">
+            <h3>Add New Class</h3>
             <hr>
             <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">
@@ -47,12 +52,25 @@ if (isset($_SESSION['admin_id']) &&
             </div>
             <?php } ?>
             <div class="mb-3">
-                <label class="form-label">Grade Code</label>
-                <input type="text" class="form-control" value="<?=$grade_code?>" name="grade_code">
+                <label class="form-label">Grade</label>
+                <select name="grade" class="form-control">
+                    <?php foreach ($grades as $grade) { ?>
+                    <option value="<?=$grade['grade_id']?>">
+                        <?=$grade['grade_code'].'-'.$grade['grade']?>
+                    </option>
+                    <?php } ?>
+
+                </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Grade</label>
-                <input type="text" class="form-control" value="<?=$grade?>" name="grade">
+                <label class="form-label">Section</label>
+                <select name="section" class="form-control">
+                    <?php foreach ($sections as $section) { ?>
+                    <option value="<?=$section['section_id']?>">
+                        <?=$section['section']?>
+                    </option>
+                    <?php } ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
@@ -61,7 +79,7 @@ if (isset($_SESSION['admin_id']) &&
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     $(document).ready(function() {
-        $("#navLinks li:nth-child(4) a").addClass('active');
+        $("#navLinks li:nth-child(6) a").addClass('active');
     });
     </script>
 

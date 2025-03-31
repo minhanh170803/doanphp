@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Y School</title>
+    <title>Welcome to Sunshine English Center</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="logo.png">
@@ -46,7 +46,7 @@
             <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
                 <img src="logo.png">
                 <h4>Welcome to Sunshine English Center</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p></p>
             </section>
             <section id="about" class="d-flex justify-content-center align-items-center flex-column">
                 <div class="card mb-3 card-1">
@@ -57,9 +57,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">About Us</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Y School</small></p>
+                                <p class="card-text"></p>
+                                <p class="card-text"><small class="text-muted">Sunshine English Center</small></p>
                             </div>
                         </div>
                     </div>
