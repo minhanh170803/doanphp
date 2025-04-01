@@ -20,9 +20,9 @@
                 </div>
                 <h3>LOGIN</h3>
                 <?php if (isset($_GET['error'])) { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= $_GET['error'] ?>
-                </div>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $_GET['error'] ?>
+                    </div>
                 <?php } ?>
                 <div class="mb-3">
                     <label class="form-label">Username</label>
