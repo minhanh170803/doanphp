@@ -1,14 +1,16 @@
 <?php
 session_start();
 if (
-  isset($_SESSION['admin_id']) &&
-  isset($_SESSION['role'])
+    isset($_SESSION['admin_id']) &&
+    isset($_SESSION['role'])
 ) {
 
-  if ($_SESSION['role'] == 'Admin') {
-    include "../DB_connection.php";
-    include "data/section.php";
-    $sections = getAllSections($conn);
+    if ($_SESSION['role'] == 'Admin') {
+        include "../DB_connection.php";
+        include "data/subject.php";
+        include "data/grade.php";
+        $courses = getAllSubjects($conn);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +18,7 @@ if (
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Section</title>
+    <title>Admin - Course</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../logo.png">
@@ -26,11 +28,11 @@ if (
 
 <body>
     <?php
-      include "inc/navbar.php";
-      if ($sections != 0) {
-      ?>
+            include "inc/navbar.php";
+            if ($courses != 0) {
+            ?>
     <div class="container mt-5">
-        <a href="section-add.php" class="btn btn-dark">Add New Section</a>
+        <a href="course-add.php" class="btn btn-dark">Add New Course</a>
 
         <?php if (isset($_GET['error'])) { ?>
         <div class="alert alert-danger mt-3 n-table" role="alert">
@@ -49,25 +51,38 @@ if (
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Section</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Course Code</th>
+                        <th scope="col">Grade</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 0;
-                foreach ($sections as $section) {
-                  $i++;  ?>
+                                foreach ($courses as $course) {
+                                    $i++;  ?>
                     <tr>
                         <th scope="row"><?= $i ?></th>
                         <td>
                             <?php
-                      echo $section['section'];
-                      ?>
+                                            echo $course['subject'];
+                                            ?>
                         </td>
                         <td>
-                            <a href="section-edit.php?section_id=<?= $section['section_id'] ?>"
+                            <?php
+                                            echo $course['subject_code'];
+                                            ?>
+                        </td>
+                        <td>
+                            <?php
+                                            $grade = getGradeById($course['grade'], $conn);
+                                            echo $grade['grade_code'] . '-' . $grade['grade'];
+                                            ?>
+                        </td>
+                        <td>
+                            <a href="course-edit.php?course_id=<?= $course['subject_id'] ?>"
                                 class="btn btn-warning">Edit</a>
 
-                            <a href="section-delete.php?section_id=<?= $section['section_id'] ?>"
+                            <a href="course-delete.php?course_id=<?= $course['subject_id'] ?>"
                                 class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
@@ -85,7 +100,7 @@ if (
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     $(document).ready(function() {
-        $("#navLinks li:nth-child(5) a").addClass('active');
+        $("#navLinks li:nth-child(7) a").addClass('active');
     });
     </script>
 
@@ -94,13 +109,13 @@ if (
 </html>
 <?php
 
-  } else {
+    } else {
+        header("Location: ../login.php");
+        exit;
+    }
+} else {
     header("Location: ../login.php");
     exit;
-  }
-} else {
-  header("Location: ../login.php");
-  exit;
 }
 
 ?>

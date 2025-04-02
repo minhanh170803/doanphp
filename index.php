@@ -1,95 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include "DB_connection.php";
+include "data/setting.php";
+$setting = getSetting($conn);
+if ($setting != 0) {
+?>
+    <!DOCTYPE html>
+    <html lang="vi">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Sunshine English Center</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="logo.png">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= $setting['school_name'] ?> - Trang chủ</title>
+        <link rel="stylesheet" href="css/homepage-style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    </head>
 
-<body class="body-home">
-    <div class="black-fill"><br /> <br />
-        <div class="container">
-            <nav class="navbar navbar-expand-lg bg-light" id="homeNav">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="logo.png" width="40">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#about">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact">Contact</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav me-right mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.php">Login</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-                <img src="logo.png">
-                <h4>Welcome to Sunshine English Center</h4>
-                <p></p>
-            </section>
-            <section id="about" class="d-flex justify-content-center align-items-center flex-column">
-                <div class="card mb-3 card-1">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="logo.png" class="img-fluid rounded-start">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">About Us</h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"><small class="text-muted">Sunshine English Center</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="contact" class="d-flex justify-content-center align-items-center flex-column">
-                <form>
-                    <h3>Contact Us</h3>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
-            </section>
-            <div class="text-center text-light">
-                Copyright &copy; 2024 Sunshine English Center. All rights reserved.
+    <body>
+        <header class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Logo Sunshine" width="150" height="150">
+                <h1><?= $setting['school_name'] ?></h1>
             </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#courses">Khóa học</a></li>
+                    <li><a href="#activities">Hoạt động</a></li>
+                </ul>
+                <a href="login.php" id="login-button" class="btn-login">Đăng nhập</a>
+            </nav>
+        </header>
 
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <section id="hero" class="hero">
+            <div class="container">
+                <img src="logo.png" alt="Học tiếng Anh" class="hero-image">
+                <h2><?= $setting['slogan'] ?></h2>
+                <p>Tham gia <?= $setting['school_name'] ?> và bắt đầu hành trình chinh phục tiếng Anh của bạn.</p>
+                <a href="#courses" class="btn">Khám phá khóa học</a>
+            </div>
+        </section>
 
-</html>
+        <section id="about" class="about">
+            <div class="container">
+                <img src="static/img/image/about_us.jpg" alt="Giới thiệu về chúng tôi">
+                <div class="about-text">
+                    <h2>Về chúng tôi</h2>
+                    <p><?= $setting['about'] ?></p>
+                    <ul>
+                        <li>Tiếng Anh Mầm non, Tiểu học, Trung học</li>
+                        <li>Tiếng Anh giao tiếp cho gia đình</li>
+                    </ul>
+                    <p>Cùng <?= $setting['school_name'] ?>, chinh phục tiếng Anh dễ dàng và hiệu quả nhé!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="courses">
+            <div class="container">
+                <h2>Các khóa học</h2>
+                <div class="course-list">
+                    <div class="course toddler">
+                        <h3>Tiếng Anh Mầm non</h3>
+                        <p>Giúp các bé làm quen với tiếng Anh thông qua các hoạt động vui chơi và học tập thú vị.</p>
+                    </div>
+                    <div class="course primary">
+                        <h3>Tiếng Anh Tiểu học</h3>
+                        <p>Củng cố nền tảng tiếng Anh với từ vựng và ngữ pháp cơ bản cho học sinh tiểu học.</p>
+                    </div>
+                    <div class="course secondary">
+                        <h3>Tiếng Anh Trung học</h3>
+                        <p>Phát triển kỹ năng ngôn ngữ toàn diện để chuẩn bị cho các kỳ thi quan trọng.</p>
+                    </div>
+                    <div class="course family">
+                        <h3>Tiếng Anh cho Gia đình</h3>
+                        <p>Các lớp học linh hoạt, phù hợp cho cả gia đình cùng tham gia học tập và nâng cao trình độ.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="activities">
+            <div class="container">
+                <h2>Các hoạt động của trung tâm</h2>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="static/img/image/rcv-2024.JPG" alt="Hoạt động ngoại khóa"></div>
+                        <div class="swiper-slide"><img src="static/img/image/trungthu-2023.jpg" alt="Cuộc thi hùng biện">
+                        </div>
+                        <div class="swiper-slide"><img src="static/img/image/rcv1.JPG" alt="Sự kiện gia đình"></div>
+                        <div class="swiper-slide"><img src="static/img/image/rcv2.JPG" alt="Trại hè Anh ngữ"></div>
+                        <div class="swiper-slide"><img src="static/img/image/games.jpg" alt="Trò chơi tiếng Anh"></div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <img src="static/img/image/logosunshine.jpg" alt="Logo Sunshine" width="80">
+                        <h4>Mạng xã hội:</h4>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/Sunshineclubkt" target="_blank"><img
+                                    src="static/img/image/facebook-icon.png" alt="Facebook"></a>
+                            <a href="https://www.youtube.com/@sunshineenglishcenterkt8872" target="_blank"><img
+                                    src="static/img/image/youtube-icon.png" alt="YouTube"></a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Liên hệ</h4>
+                        <p>Cơ sở 1: 233/3 Thi Sách, tổ 6, P. Thắng Lợi, TP. Kon Tum</p>
+                        <p>Cơ sở 2: 132 Phạm Văn Đồng, P. Lê Lợi, TP. Kon Tum</p>
+                        <p>Hotline: 0902366062</p>
+                        <p>Email: sunshinektcenter01@gmail.com</p>
+                    </div>
+                </div>
+                <p>&copy; <?= $setting['current_year'] ?> <?= $setting['school_name'] ?>. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        <script>
+            const swiper = new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                }
+            });
+        </script>
+    </body>
+
+    </html>
+<?php } else {
+    header("Location: login.php");
+    exit;
+} ?>
