@@ -98,6 +98,36 @@ if ($setting != 0) {
                 </div>
             </div>
         </section>
+        <section id="contact" class="d-flex justify-content-center align-items-center flex-column">
+            <form method="post" action="req/contact.php">
+                <h3>Contact Us</h3>
+                <?php if (isset($_GET['error'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $_GET['error'] ?>
+                    </div>
+                <?php } ?>
+                <?php if (isset($_GET['success'])) { ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= $_GET['success'] ?>
+                    </div>
+                <?php } ?>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                        aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="full_name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </section>
 
         <footer class="footer">
             <div class="container">
