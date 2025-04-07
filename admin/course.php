@@ -1,15 +1,15 @@
 <?php
 session_start();
 if (
-    isset($_SESSION['admin_id']) &&
-    isset($_SESSION['role'])
+  isset($_SESSION['admin_id']) &&
+  isset($_SESSION['role'])
 ) {
 
-    if ($_SESSION['role'] == 'Admin') {
-        include "../DB_connection.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        $courses = getAllSubjects($conn);
+  if ($_SESSION['role'] == 'Admin') {
+    include "../DB_connection.php";
+    include "data/subject.php";
+    include "data/grade.php";
+    $courses = getAllSubjects($conn);
 
 ?>
 <!DOCTYPE html>
@@ -28,9 +28,9 @@ if (
 
 <body>
     <?php
-            include "inc/navbar.php";
-            if ($courses != 0) {
-            ?>
+      include "inc/navbar.php";
+      if ($courses != 0) {
+      ?>
     <div class="container mt-5">
         <a href="course-add.php" class="btn btn-dark">Add New Course</a>
 
@@ -58,25 +58,25 @@ if (
                 </thead>
                 <tbody>
                     <?php $i = 0;
-                                foreach ($courses as $course) {
-                                    $i++;  ?>
+                foreach ($courses as $course) {
+                  $i++;  ?>
                     <tr>
                         <th scope="row"><?= $i ?></th>
                         <td>
                             <?php
-                                            echo $course['subject'];
-                                            ?>
+                      echo $course['subject'];
+                      ?>
                         </td>
                         <td>
                             <?php
-                                            echo $course['subject_code'];
-                                            ?>
+                      echo $course['subject_code'];
+                      ?>
                         </td>
                         <td>
                             <?php
-                                            $grade = getGradeById($course['grade'], $conn);
-                                            echo $grade['grade_code'] . '-' . $grade['grade'];
-                                            ?>
+                      $grade = getGradeById($course['grade'], $conn);
+                      echo $grade['grade_code'] . '-' . $grade['grade'];
+                      ?>
                         </td>
                         <td>
                             <a href="course-edit.php?course_id=<?= $course['subject_id'] ?>"
@@ -100,7 +100,7 @@ if (
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     $(document).ready(function() {
-        $("#navLinks li:nth-child(7) a").addClass('active');
+        $("#navLinks li:nth-child(8) a").addClass('active');
     });
     </script>
 
@@ -109,13 +109,11 @@ if (
 </html>
 <?php
 
-    } else {
-        header("Location: ../login.php");
-        exit;
-    }
-} else {
+  } else {
     header("Location: ../login.php");
     exit;
+  }
+} else {
+  header("Location: ../login.php");
+  exit;
 }
-
-?>
