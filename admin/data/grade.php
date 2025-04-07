@@ -7,12 +7,13 @@ function getAllGrades($conn)
   $stmt->execute();
 
   if ($stmt->rowCount() >= 1) {
-    $grades = $stmt->fetchAll();
+    $grades = $stmt->fetchAll(PDO::FETCH_ASSOC); // 
     return $grades;
   } else {
-    return 0;
+    return [];
   }
 }
+
 
 // Get Grade by ID
 function getGradeById($grade_id, $conn)

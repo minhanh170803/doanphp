@@ -61,7 +61,7 @@ if (isset($_POST['admin_pass']) &&
     
   }else {
   	$em = "An error occurred";
-    header("Location: ../teacher-edit.php?error=$em");
+    header("Location: ../teacher-edit.php?error=$em&$data");
     exit;
   }
 
